@@ -5,7 +5,7 @@
   --color-text-secondary: #FFFFFF;
   --color-text-p: #5E5E5E;
   --color-text-li: #353535;
-  --color-text-searchbar-hint: #BFBFBF;
+  --color-text-searchbar-placeholder: #BFBFBF;
   --color-text-searchbar: #353535;
   --color-body-background: #F9F9F9;
   --color-accent-background: #F22539;
@@ -24,7 +24,7 @@
 body {
   min-height: 100vh;
   color: var(--color-text);
-  background: var(--color-background);
+  background: var(--color-body-background);
   font-family: 'Lato', sans-serif;
   /* font-family: 'Montserrat', sans-serif; */
   text-rendering: optimizeLegibility;
