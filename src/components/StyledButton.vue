@@ -13,12 +13,14 @@ defineProps({
     required: true,
   },
 });
+
+const emit = defineEmits(["action"]);
 </script>
 
 <template>
-  <div class="btn" :class="{ secondary: secondary }" @click="$router.push(url)">
-    <div class="icon-container">
-      <slot></slot>
+  <div class="btn" :class="{ secondary: secondary }" @click="emit('action')">
+    <div class="icon-container" v-if="$slots.icon">
+      <slot name="icon"></slot>
     </div>
     <p>{{ text }}</p>
   </div>
@@ -26,6 +28,11 @@ defineProps({
 
 <style scoped>
 .btn {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
   padding: 11px 20px;
   border-radius: 60px;
   background: var(--color-accent-background);

@@ -1,6 +1,13 @@
 <script setup>
 import StyledButton from "../components/StyledButton.vue";
 import IconWelcome from "../components/icons/IconWelcome.vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
+const getStarted = () => {
+  router.push("/all");
+};
 </script>
 
 <template>
@@ -14,7 +21,7 @@ import IconWelcome from "../components/icons/IconWelcome.vue";
       Trainers in the Pokémon world.
     </p>
     <div class="btn-container">
-      <StyledButton :text="'Get started'" :url="'/all'"> </StyledButton>
+      <StyledButton :text="'Get started'" :url="'/all'" @action="getStarted" />
     </div>
   </div>
 </template>
