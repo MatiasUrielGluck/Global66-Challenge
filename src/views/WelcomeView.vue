@@ -2,10 +2,13 @@
 import StyledButton from "../components/StyledButton.vue";
 import IconWelcome from "../components/icons/IconWelcome.vue";
 import { useRouter } from "vue-router";
+import { usePokemonsStore } from "../stores/pokemons";
 
 const router = useRouter();
+const store = usePokemonsStore();
 
 const getStarted = () => {
+  store.fetchPokemons();
   router.push("/all");
 };
 </script>
@@ -32,6 +35,7 @@ const getStarted = () => {
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
+  padding: 6.66%;
 }
 
 .icon-welcome-container {
@@ -63,6 +67,7 @@ p {
 
 @media (min-width: 1024px) {
   .welcome {
+    padding: 0 25%;
     min-height: 100vh;
   }
 }

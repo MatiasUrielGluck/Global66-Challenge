@@ -30,7 +30,6 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  padding: 6.66%;
 }
 
 h1 {
@@ -39,10 +38,4 @@ h1 {
 
 p {
   color: var(--color-text-p);
-}
-
-@media (min-width: 1024px) {
-  body {
-    padding: 0 25%;
-  }
 }
