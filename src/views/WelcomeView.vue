@@ -1,5 +1,5 @@
 <script setup>
-import { RouterLink } from "vue-router";
+import StyledButton from "../components/StyledButton.vue";
 import IconWelcome from "../components/icons/IconWelcome.vue";
 </script>
 
@@ -13,8 +13,8 @@ import IconWelcome from "../components/icons/IconWelcome.vue";
       The digital encyclopedia created by Professor Oak is an invaluable tool to
       Trainers in the Pokémon world.
     </p>
-    <div class="btn">
-      <RouterLink to="/all">Get started</RouterLink>
+    <div class="btn-container">
+      <StyledButton :text="'Get started'" :url="'/all'"> </StyledButton>
     </div>
   </div>
 </template>
@@ -50,10 +50,8 @@ p {
   line-height: 27px;
 }
 
-.btn {
+.btn-container {
   margin-top: 50px;
-  padding: 11px 20px;
-  background: var(--color-accent-background);
 }
 
 @media (min-width: 1024px) {

@@ -9,6 +9,7 @@
   --color-text-searchbar: #353535;
   --color-body-background: #F9F9F9;
   --color-accent-background: #F22539;
+  --color-accent-secondary: #BFBFBF;
 }
 
 *,
@@ -38,19 +39,6 @@ h1 {
 
 p {
   color: var(--color-text-p);
-}
-
-.btn {
-  border-radius: 60px;
-}
-
-.btn a {
-  text-decoration: none;
-  color: var(--color-text-secondary);
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 21.6px;
-  text-align: center;
 }
 
 @media (min-width: 1024px) {
