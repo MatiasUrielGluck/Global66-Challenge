@@ -24,7 +24,7 @@ const getStarted = () => {
       Trainers in the Pokémon world.
     </p>
     <div class="btn-container">
-      <StyledButton :text="'Get started'" :url="'/all'" @action="getStarted" />
+      <StyledButton :text="'Get started'" :url="'/all'" @action="getStarted" :width="'131px'" :height="'44px'"/>
     </div>
   </div>
 </template>

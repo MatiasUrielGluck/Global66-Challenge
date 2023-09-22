@@ -1,13 +1,17 @@
 <script setup>
+import { ref } from "vue";
 import { usePokemonsStore } from "../stores/pokemons";
 import IconLoading from "../components/icons/IconLoading.vue";
 import SearchBar from "../components/SearchBar.vue";
 import PokeGallery from "../components/PokeGallery.vue";
+import NavFooter from "../components/NavFooter.vue";
 
 const store = usePokemonsStore();
 
-const onQueryChange = (searchQuery) => {
-  console.log(searchQuery);
+const desiredPokeName = ref("");
+
+const onQueryChange = (newSearchQuery) => {
+  desiredPokeName.value = newSearchQuery;
 };
 </script>
 
@@ -15,8 +19,9 @@ const onQueryChange = (searchQuery) => {
   <div class="all-pokemons" v-if="store.pokemons.length">
     <SearchBar @change="onQueryChange" />
     <div class="gallery">
-      <PokeGallery />
+      <PokeGallery :search-query="desiredPokeName" />
     </div>
+    <NavFooter :actual-page="'all'" />
   </div>
 
   <div class="loading" v-else>

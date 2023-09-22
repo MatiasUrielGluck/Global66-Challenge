@@ -8,6 +8,7 @@
   --color-text-searchbar-placeholder: #BFBFBF;
   --color-text-searchbar: #353535;
   --color-body-background: #F9F9F9;
+  --color-body-background-secondary: #FFFFFF;
   --color-accent-background: #F22539;
   --color-accent-secondary: #BFBFBF;
 }
@@ -38,4 +39,10 @@ h1 {
 
 p {
   color: var(--color-text-p);
+}
+
+.prevent-select {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
 }

@@ -9,10 +9,22 @@ export const usePokemonsStore = defineStore("pokemons", () => {
   const getPokemonList = computed(() => pokemons.value);
   const getFavoritesList = computed(() => favorites.value);
 
-  const toggleFavorite = () => {};
+  const toggleFavorite = (name) => {
+    const pokemonIndex = pokemons.value.findIndex(
+      (pokemon) => pokemon.name === name
+    );
+    pokemons.value[pokemonIndex].favorite =
+      !pokemons.value[pokemonIndex].favorite;
+  };
 
   async function fetchPokemons() {
-    pokemons.value = await fetchPokemonList();
+    const data = await fetchPokemonList();
+    data.forEach((pokemon) => {
+      pokemons.value.push({
+        ...pokemon,
+        favorite: false,
+      });
+    });
   }
 
   return {

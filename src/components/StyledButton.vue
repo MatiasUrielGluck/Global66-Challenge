@@ -12,13 +12,25 @@ defineProps({
     type: String,
     required: true,
   },
+  width: {
+    type: String,
+    required: true,
+  },
+  height: {
+    type: String,
+    required: true,
+  },
+  forceWidth: {
+    type: Boolean,
+    required: false,
+  },
 });
 
 const emit = defineEmits(["action"]);
 </script>
 
 <template>
-  <div class="btn" :class="{ secondary: secondary }" @click="emit('action')">
+  <div class="btn prevent-select" :class="{ secondary: secondary, forceWidth: forceWidth }" @click="emit('action')">
     <div class="icon-container" v-if="$slots.icon">
       <slot name="icon"></slot>
     </div>
@@ -28,14 +40,23 @@ const emit = defineEmits(["action"]);
 
 <style scoped>
 .btn {
+  cursor: pointer;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: 10px;
-  padding: 11px 20px;
+
+  width: v-bind(width);
+  height: v-bind(height);
   border-radius: 60px;
   background: var(--color-accent-background);
+}
+
+@media (min-width: 1024px) {
+  .btn.forceWidth {
+    width: 275px;
+  }
 }
 
 .btn.secondary {
