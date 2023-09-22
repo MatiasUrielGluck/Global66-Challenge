@@ -5,12 +5,14 @@ import { usePokemonsStore } from "../stores/pokemons";
 
 const store = usePokemonsStore();
 
-defineProps({
+const props = defineProps({
   pokemon: {
     type: Object,
     required: true,
   },
 });
+
+const emit = defineEmits(["selectPokemon"]);
 
 const capitalize = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -18,7 +20,7 @@ const capitalize = (string) => {
 </script>
 
 <template>
-  <div class="poke-item prevent-select">
+  <div class="poke-item prevent-select" @click="emit('selectPokemon', pokemon)">
     <p>{{ capitalize(pokemon.name) }}</p>
     <div class="fav-btn" @click="store.toggleFavorite(pokemon.name)">
       <IconFavoriteEnabled v-if="pokemon.favorite" />

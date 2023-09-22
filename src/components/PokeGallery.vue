@@ -1,5 +1,7 @@
 <script setup>
+import { ref } from "vue";
 import PokeItem from "./PokeItem.vue";
+import PokeModal from "./PokeModal.vue";
 
 defineProps({
   pokelist: {
@@ -12,9 +14,27 @@ defineProps({
     default: false,
   },
 });
+
+const isModalOpen = ref(false);
+const selectedPokemon = ref({});
+
+const selectPokemon = (pokemon) => {
+  selectedPokemon.value = pokemon;
+  isModalOpen.value = true;
+};
+
+const unselectPokemon = () => {
+  selectedPokemon.value = {};
+  isModalOpen.value = false;
+};
 </script>
 
 <template>
+  <PokeModal
+    v-if="isModalOpen"
+    :pokemon="selectedPokemon"
+    @close-modal="unselectPokemon"
+  />
   <div class="poke-gallery">
     <PokeItem
       v-for="pokemon in pokelist.filter((pokemon) =>
@@ -22,6 +42,7 @@ defineProps({
       )"
       :key="pokemon.name"
       :pokemon="pokemon"
+      @select-pokemon="selectPokemon"
     />
   </div>
 </template>

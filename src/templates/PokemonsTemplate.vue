@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 import { usePokemonsStore } from "../stores/pokemons";
 import IconLoading from "../components/icons/IconLoading.vue";
 import SearchBar from "../components/SearchBar.vue";
@@ -15,10 +16,13 @@ const props = defineProps({
 });
 
 const store = usePokemonsStore();
+const router = useRouter();
 
+const query = ref("");
 const pokelist = ref(store.getPokemonList);
 
 const onQueryChange = (newSearchQuery) => {
+  query.value = newSearchQuery;
   if (props.isFavoritesPage)
     pokelist.value = store.getPokemonList.filter(
       (pokemon) => pokemon.favorite && pokemon.name.includes(newSearchQuery)
@@ -33,6 +37,10 @@ const onQueryChange = (newSearchQuery) => {
 const goBack = () => {
   document.getElementById("search-input").value = "";
   onQueryChange("");
+
+  if (props.isFavoritesPage) {
+    router.push("/all");
+  }
 };
 </script>
 

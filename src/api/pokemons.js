@@ -5,3 +5,9 @@ export const fetchPokemonList = async () => {
   const data = await res.json();
   return data.results;
 };
+
+export const fetchSinglePokemon = async (pokeName) => {
+  const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokeName}`);
+  const data = await res.json();
+  return data;
+};
