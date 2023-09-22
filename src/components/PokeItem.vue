@@ -22,7 +22,7 @@ const capitalize = (string) => {
 <template>
   <div class="poke-item prevent-select" @click="emit('selectPokemon', pokemon)">
     <p>{{ capitalize(pokemon.name) }}</p>
-    <div class="fav-btn" @click="store.toggleFavorite(pokemon.name)">
+    <div class="fav-btn" v-on:click.stop @click="store.toggleFavorite(pokemon.name)">
       <IconFavoriteEnabled v-if="pokemon.favorite" />
       <IconFavoriteDisabled v-else />
     </div>
