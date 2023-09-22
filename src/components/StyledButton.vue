@@ -8,10 +8,6 @@ defineProps({
     type: String,
     required: true,
   },
-  url: {
-    type: String,
-    required: true,
-  },
   width: {
     type: String,
     required: true,

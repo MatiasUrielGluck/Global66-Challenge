@@ -13,7 +13,7 @@ watch(searchQuery, () => {
 <template>
   <div class="container">
     <form>
-      <input type="text" v-model="searchQuery" placeholder="Search" />
+      <input type="text" v-model="searchQuery" placeholder="Search" id="search-input" />
       <IconSearch class="search-icon" />
     </form>
   </div>
