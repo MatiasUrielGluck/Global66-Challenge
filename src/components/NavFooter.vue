@@ -59,7 +59,7 @@ footer {
   padding: 0 6.66%;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
   footer {
     padding: 0 25%;
   }

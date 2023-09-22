@@ -29,7 +29,7 @@ watch(searchQuery, () => {
   background: var(--color-body-background);
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
   .container {
     padding: 35px 25%;
   }

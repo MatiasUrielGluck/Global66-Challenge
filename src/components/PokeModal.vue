@@ -6,6 +6,7 @@ import StyledButton from "./StyledButton.vue";
 import IconFavoriteEnabled from "./icons/IconFavoriteEnabled.vue";
 import { usePokemonsStore } from "../stores/pokemons";
 import IconFavoriteDisabled from "./icons/IconFavoriteDisabled.vue";
+import IconLoading from "./icons/IconLoading.vue";
 
 const store = usePokemonsStore();
 
@@ -87,7 +88,9 @@ onMounted(async () => {
           </div>
         </div>
 
-        <div v-else></div>
+        <div class="loading" v-else>
+          <IconLoading />
+        </div>
       </div>
     </div>
   </Teleport>
@@ -185,7 +188,28 @@ li span {
   bottom: 20px;
 }
 
-@media (min-width: 1024px) {
+.loading {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  animation: loading-animation 1.5s infinite linear;
+}
+
+@keyframes loading-animation {
+  0% {
+    transform: scale(100%) /**/;
+  }
+  50% {
+    transform: scale(120%) /**/;
+  }
+  100% {
+    transform: scale(100%) /**/;
+  }
+}
+
+@media (min-width: 768px) {
   .internal-container {
     width: calc(100% - 25% * 2);
   }

@@ -54,7 +54,7 @@ const emit = defineEmits(["action"]);
   background: var(--color-button-pressed);
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
   .btn.forceWidth {
     width: 275px;
   }

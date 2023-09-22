@@ -91,7 +91,7 @@ onMounted(() => {
   margin-top: 90px;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
   .pokemons-view {
     padding: 0 25%;
     min-height: 100vh;
