@@ -4,10 +4,8 @@ import { fetchPokemonList } from "../api/pokemons";
 
 export const usePokemonsStore = defineStore("pokemons", () => {
   const pokemons = ref([]);
-  const favorites = ref([]);
 
   const getPokemonList = computed(() => pokemons.value);
-  const getFavoritesList = computed(() => favorites.value);
 
   const toggleFavorite = (name) => {
     const pokemonIndex = pokemons.value.findIndex(
@@ -29,9 +27,7 @@ export const usePokemonsStore = defineStore("pokemons", () => {
 
   return {
     pokemons,
-    favorites,
     getPokemonList,
-    getFavoritesList,
     fetchPokemons,
     toggleFavorite,
   };
