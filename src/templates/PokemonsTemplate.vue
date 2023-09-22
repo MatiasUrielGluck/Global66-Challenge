@@ -25,11 +25,13 @@ const onQueryChange = (newSearchQuery) => {
   query.value = newSearchQuery;
   if (props.isFavoritesPage)
     pokelist.value = store.getPokemonList.filter(
-      (pokemon) => pokemon.favorite && pokemon.name.includes(newSearchQuery)
+      (pokemon) =>
+        pokemon.favorite &&
+        pokemon.name.toLowerCase().includes(newSearchQuery.toLowerCase())
     );
   else {
     pokelist.value = store.getPokemonList.filter((pokemon) =>
-      pokemon.name.includes(newSearchQuery)
+      pokemon.name.toLowerCase().includes(newSearchQuery.toLowerCase())
     );
   }
 };
