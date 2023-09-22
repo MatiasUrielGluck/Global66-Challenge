@@ -5,7 +5,7 @@ import { usePokemonsStore } from "../stores/pokemons";
 
 const store = usePokemonsStore();
 
-const props = defineProps({
+defineProps({
   pokemon: {
     type: Object,
     required: true,
@@ -34,7 +34,7 @@ const capitalize = (string) => {
   cursor: pointer;
   height: 60px;
   width: 100%;
-  padding: 0 20px;
+  padding: 20px 10px 20px 20px;
   border-radius: 5px;
   display: flex;
   flex-flow: row nowrap;

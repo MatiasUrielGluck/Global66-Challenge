@@ -2,6 +2,12 @@
 import { ref, onMounted, toRaw } from "vue";
 import IconClose from "./icons/IconClose.vue";
 import { fetchSinglePokemon } from "../api/pokemons";
+import StyledButton from "./StyledButton.vue";
+import IconFavoriteEnabled from "./icons/IconFavoriteEnabled.vue";
+import { usePokemonsStore } from "../stores/pokemons";
+import IconFavoriteDisabled from "./icons/IconFavoriteDisabled.vue";
+
+const store = usePokemonsStore();
 
 const props = defineProps({
   pokemon: {
@@ -28,6 +34,13 @@ const getTypes = () => {
   }
 
   return result.slice(0, result.length - 2);
+};
+
+const shareInfo = () => {
+  let info = `${pokeInfo.value.name}, ${pokeInfo.value.weight}, ${
+    pokeInfo.value.height
+  }, ${getTypes()}`;
+  navigator.clipboard.writeText(info);
 };
 
 onMounted(async () => {
@@ -60,7 +73,20 @@ onMounted(async () => {
               </ul>
             </div>
           </div>
+          <div class="share-btn">
+            <StyledButton
+              :text="'Share to my friends'"
+              :width="'195px'"
+              :height="'44px'"
+              @action="shareInfo"
+            />
+          </div>
+          <div class="favorite-btn" @click="store.toggleFavorite(pokemon.name)">
+            <IconFavoriteEnabled v-if="pokemon.favorite" />
+            <IconFavoriteDisabled v-else />
+          </div>
         </div>
+
         <div v-else></div>
       </div>
     </div>
@@ -139,11 +165,23 @@ onMounted(async () => {
   font-weight: 500;
   line-height: 27px;
   border-bottom: 1px solid var(--color-border);
-  color: var( --color-text-p);
+  color: var(--color-text-p);
 }
 
 li span {
   font-weight: 700;
+}
+
+.share-btn {
+  position: absolute;
+  left: 30px;
+  bottom: 20px;
+}
+
+.favorite-btn {
+  position: absolute;
+  right: 30px;
+  bottom: 20px;
 }
 
 @media (min-width: 1024px) {
