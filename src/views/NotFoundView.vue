@@ -1,15 +1,15 @@
 <script setup>
-// window.location.href = "/"
+window.location.href = "/";
 </script>
 
 <template>
   <div class="notfound">
-    <h1>Uh-oh!</h1>
-    <p>You look lost on your journey!</p>
-    <p>Redirecting to the main page...</p>
+    <!-- 
+      If the app had more routes, then I would create a special view like this
+      In this case I created three routes: /, /all and /favorites. The user should not enter the routes manually.
+      That's why this component only redirects to the Poke Welcome.
+    -->
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

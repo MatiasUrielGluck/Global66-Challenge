@@ -114,6 +114,7 @@ onMounted(async () => {
 }
 
 .close-btn {
+  cursor: pointer;
   position: absolute;
   top: 15px;
   right: 15px;

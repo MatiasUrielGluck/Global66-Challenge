@@ -47,6 +47,11 @@ const emit = defineEmits(["action"]);
   height: v-bind(height);
   border-radius: 60px;
   background: var(--color-accent-background);
+  transition: all 0.2s ease;
+}
+
+.btn:active {
+  background: var(--color-button-pressed);
 }
 
 @media (min-width: 1024px) {
