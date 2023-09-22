@@ -6,13 +6,20 @@ defineProps({
     type: Object,
     required: true,
   },
+  isFavoritesPage: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
 });
 </script>
 
 <template>
   <div class="poke-gallery">
     <PokeItem
-      v-for="pokemon in pokelist"
+      v-for="pokemon in pokelist.filter((pokemon) =>
+        isFavoritesPage ? pokemon.favorite : true
+      )"
       :key="pokemon.name"
       :pokemon="pokemon"
     />
