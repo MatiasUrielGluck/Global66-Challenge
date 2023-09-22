@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { usePokemonsStore } from "../stores/pokemons";
 import IconLoading from "../components/icons/IconLoading.vue";
@@ -42,6 +42,11 @@ const goBack = () => {
     router.push("/all");
   }
 };
+
+onMounted(() => {
+  if (store.getPokemonList.length) return;
+  store.fetchPokemons();
+});
 </script>
 
 <template>

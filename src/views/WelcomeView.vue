@@ -2,13 +2,10 @@
 import StyledButton from "../components/StyledButton.vue";
 import IconWelcome from "../components/icons/IconWelcome.vue";
 import { useRouter } from "vue-router";
-import { usePokemonsStore } from "../stores/pokemons";
 
 const router = useRouter();
-const store = usePokemonsStore();
 
 const getStarted = () => {
-  store.fetchPokemons();
   router.push("/all");
 };
 </script>
@@ -24,7 +21,13 @@ const getStarted = () => {
       Trainers in the Pokémon world.
     </p>
     <div class="btn-container">
-      <StyledButton :text="'Get started'" :url="'/all'" @action="getStarted" :width="'131px'" :height="'44px'"/>
+      <StyledButton
+        :text="'Get started'"
+        :url="'/all'"
+        @action="getStarted"
+        :width="'131px'"
+        :height="'44px'"
+      />
     </div>
   </div>
 </template>
