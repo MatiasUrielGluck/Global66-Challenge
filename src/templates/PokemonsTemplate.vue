@@ -46,6 +46,7 @@ const goBack = () => {
 };
 
 onMounted(() => {
+  window.scrollTo(0, 0);
   if (store.getPokemonList.length) return;
   store.fetchPokemons();
 });
