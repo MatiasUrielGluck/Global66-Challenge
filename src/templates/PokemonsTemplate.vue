@@ -7,6 +7,7 @@ import SearchBar from "../components/SearchBar.vue";
 import PokeGallery from "../components/PokeGallery.vue";
 import NavFooter from "../components/NavFooter.vue";
 import StyledButton from "../components/StyledButton.vue";
+import { storeToRefs } from "pinia";
 
 const props = defineProps({
   isFavoritesPage: {
@@ -19,21 +20,14 @@ const store = usePokemonsStore();
 const router = useRouter();
 
 const query = ref("");
-const pokelist = ref(store.getPokemonList);
+
+const { getPokemonList, getFavPokemonList } = storeToRefs(store);
+const pokelist = ref(
+  props.isFavoritesPage ? getFavPokemonList : getPokemonList
+);
 
 const onQueryChange = (newSearchQuery) => {
   query.value = newSearchQuery;
-  if (props.isFavoritesPage)
-    pokelist.value = store.getPokemonList.filter(
-      (pokemon) =>
-        pokemon.favorite &&
-        pokemon.name.toLowerCase().includes(newSearchQuery.toLowerCase())
-    );
-  else {
-    pokelist.value = store.getPokemonList.filter((pokemon) =>
-      pokemon.name.toLowerCase().includes(newSearchQuery.toLowerCase())
-    );
-  }
 };
 
 const goBack = () => {
@@ -60,6 +54,7 @@ onMounted(() => {
         <PokeGallery
           :pokelist="pokelist"
           :is-favorites-page="isFavoritesPage"
+          :query="query"
         />
       </div>
       <NavFooter :actual-page="isFavoritesPage ? 'favorites' : 'all'" />
@@ -129,6 +124,12 @@ onMounted(() => {
 
 .invalid-query > .back-btn {
   margin-top: 25px;
+}
+
+@media (min-width: 768px) {
+  .invalid-query {
+    margin-top: 120px;
+  }
 }
 
 /* Loading display */

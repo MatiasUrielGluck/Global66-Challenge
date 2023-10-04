@@ -13,6 +13,10 @@ defineProps({
     required: false,
     default: false,
   },
+  query: {
+    type: String,
+    required: true,
+  },
 });
 
 const isModalOpen = ref(false);
@@ -37,8 +41,8 @@ const unselectPokemon = () => {
   />
   <div class="poke-gallery">
     <PokeItem
-      v-for="pokemon in pokelist.filter((pokemon) =>
-        isFavoritesPage ? pokemon.favorite : true
+      v-for="pokemon in pokelist.filter((poke) =>
+        poke.name.toLowerCase().includes(query.toLowerCase())
       )"
       :key="pokemon.name"
       :pokemon="pokemon"

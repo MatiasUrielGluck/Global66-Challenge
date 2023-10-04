@@ -14,6 +14,7 @@
   --color-border: #E8E8E8;
   --color-button-background: #F5F5F5;
   --color-button-pressed: #C00E20;
+  --query-width: 1024px;
 }
 
 *,
