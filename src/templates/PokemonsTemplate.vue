@@ -47,7 +47,22 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="pokemons-view" v-if="store.pokemons.length">
+  <div class="invalid-fetch" v-if="store.pokemons === 500">
+    <div class="invalid-query">
+      <h1>Uh-oh!</h1>
+      <p>There was a problem loading the application.</p>
+      <div class="back-btn">
+        <StyledButton
+          :text="'Try again'"
+          :width="'155px'"
+          :height="'44px'"
+          @action="store.fetchPokemons()"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="pokemons-view" v-else-if="store.pokemons.length">
     <SearchBar @change="onQueryChange" />
     <div class="valid-query" v-if="pokelist.length">
       <div class="gallery">
@@ -98,6 +113,21 @@ onMounted(() => {
   .gallery {
     margin-top: 125px;
   }
+}
+
+/* Invalid fetch (api error) */
+.invalid-fetch {
+  height: 100vh;
+}
+
+.invalid-fetch > .invalid-query {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
 }
 
 /* Invalid query (empty list) */

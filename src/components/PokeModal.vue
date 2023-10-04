@@ -83,7 +83,13 @@ onMounted(async () => {
             />
           </div>
           <div class="favorite-btn" @click="store.toggleFavorite(pokemon.name)">
-            <IconFavoriteEnabled v-if="pokemon.favorite" />
+            <IconFavoriteEnabled
+              v-if="
+                store.getFavPokemonList.find(
+                  (poke) => poke.name === props.pokemon.name
+                )
+              "
+            />
             <IconFavoriteDisabled v-else />
           </div>
         </div>
