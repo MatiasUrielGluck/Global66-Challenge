@@ -1,9 +1,9 @@
 <script setup>
-import { ref } from "vue";
+import { onBeforeUpdate, ref } from "vue";
 import PokeItem from "./PokeItem.vue";
 import PokeModal from "./PokeModal.vue";
 
-defineProps({
+const props = defineProps({
   pokelist: {
     type: Object,
     required: true,
@@ -31,6 +31,19 @@ const unselectPokemon = () => {
   selectedPokemon.value = {};
   isModalOpen.value = false;
 };
+
+const emit = defineEmits(["showInvalidQuery"]);
+const list = ref(props.pokelist);
+
+onBeforeUpdate(() => {
+  list.value = props.pokelist.filter((poke) =>
+    poke.name.toLowerCase().includes(props.query.toLowerCase())
+  );
+
+  if (!list.value.length) {
+    emit("showInvalidQuery");
+  }
+});
 </script>
 
 <template>
@@ -41,9 +54,7 @@ const unselectPokemon = () => {
   />
   <div class="poke-gallery">
     <PokeItem
-      v-for="pokemon in pokelist.filter((poke) =>
-        poke.name.toLowerCase().includes(query.toLowerCase())
-      )"
+      v-for="pokemon in list"
       :key="pokemon.name"
       :pokemon="pokemon"
       @select-pokemon="selectPokemon"

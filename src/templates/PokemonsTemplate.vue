@@ -21,6 +21,8 @@ const router = useRouter();
 
 const query = ref("");
 
+const invalidQuery = ref(false);
+
 const { getPokemonList, getFavPokemonList } = storeToRefs(store);
 const pokelist = ref(
   props.isFavoritesPage ? getFavPokemonList : getPokemonList
@@ -30,9 +32,14 @@ const onQueryChange = (newSearchQuery) => {
   query.value = newSearchQuery;
 };
 
+const showInvalidQuery = () => {
+  invalidQuery.value = true;
+};
+
 const goBack = () => {
   document.getElementById("search-input").value = "";
   onQueryChange("");
+  invalidQuery.value = false;
 
   if (props.isFavoritesPage) {
     router.push("/all");
@@ -47,7 +54,13 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="invalid-fetch" v-if="store.pokemons === 500">
+  <div class="loading" v-if="!store.pokemons.length && store.pokemons !== 500">
+    <div class="loader-icon">
+      <IconLoading />
+    </div>
+  </div>
+
+  <div class="invalid-fetch" v-else-if="store.pokemons === 500">
     <div class="invalid-query">
       <h1>Uh-oh!</h1>
       <p>There was a problem loading the application.</p>
@@ -62,14 +75,15 @@ onMounted(() => {
     </div>
   </div>
 
-  <div class="pokemons-view" v-else-if="store.pokemons.length">
+  <div class="pokemons-view" v-else-if="true">
     <SearchBar @change="onQueryChange" />
-    <div class="valid-query" v-if="pokelist.length">
+    <div class="valid-query" v-if="!invalidQuery">
       <div class="gallery">
         <PokeGallery
           :pokelist="pokelist"
           :is-favorites-page="isFavoritesPage"
           :query="query"
+          @show-invalid-query="showInvalidQuery"
         />
       </div>
       <NavFooter :actual-page="isFavoritesPage ? 'favorites' : 'all'" />
@@ -85,12 +99,6 @@ onMounted(() => {
           @action="goBack()"
         />
       </div>
-    </div>
-  </div>
-
-  <div class="loading" v-else>
-    <div class="loader-icon">
-      <IconLoading />
     </div>
   </div>
 </template>
